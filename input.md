@@ -1,18 +1,18 @@
-#List of input file keys and brief explanation
+# List of input file keys and brief explanation
 
 The input file is a simple `.ini` file, with sections marked as `[Section]` and one field per line. Lines can be commented with `#`.
 Here we will list all sections and possible keywords (many of which are optional, with deafult assumed if missing).
 Some basic checks are performed, but be careful about parameters consistency, especially with optional experiments, as not all possible combinations have been tested.
 Please see folder `inputs` for sample common inputs.
 
-##[IO]
+## [IO]
 Information about where to save output files.
 The code produces 3 output files: `_out.dat`, containing the real time training progress, `_itdata_`*x*`.pkl`, containing summary data about iteration *x*, and `_findata.pkl`, containing a final summary of the whole IMP.
 
 - `save_dir` -- The directory where to save all outputs.
 - `prefix` -- Prefix for the output, the default "IMP" produces `IMP_out.dat` etc.
 
-##[Data]
+## [Data]
 Information about the training dataset. For now only supports downsampled ImageNet data from `http://www.image-net.org/`.
 
 - `dataset` -- Dataset of choice, only supports `ImageNet32` (default) and `ImageNet64`.
@@ -24,7 +24,7 @@ Information about the training dataset. For now only supports downsampled ImageN
     - `m,`*x* : indicates to take classes modulo *x*, e.g. `m,10` as done in the paper.
     - `f,`*x*`,`*filename* : indicates to consider *x* categories and apply a superclass list found in file *filename* (expected as a comma-separated list of 1000 superclass identifiers). To reproduce the paper use `f,10,classes.dat` with the supplied file.
 
-##[Network]
+## [Network]
 All the options to define the network and training parameters. Besides fully connected and cross-entropy layers, a limited form of convolutional layers is available.
 
 - `arch` -- The architecture of the network as a colon-separated string of layers. The network input shape is taken from the data, each layer fully connected layer is just defined by its size, and the final cross entropy layer spans the total number of categories. Simple convolutional and max-pool layers are also available. As an example, the string `f1024:f1024:f1024:x` produces the main network considered in the paper. The notation is the following:
@@ -46,7 +46,7 @@ All the options to define the network and training parameters. Besides fully con
 - `rest_mask_file` -- Name (or complete path) of the file to compute the starting mask from (typically step *rest_it*-1 of the previous run, defaults to *save_dir*`/IMP_itdata_`*(rest_it-1)*`.pkl`)
 - `rest_file_step` -- *(int)* Which checkpoint of the loaded iteration to use to compute the masl (typically the last one, as the default -1, but might be -2 if training was run for longer).
 
-##[IMP]
+## [IMP]
 All options about the iterative magnitude pruning (IMP) procedure: what to prune, by how much and which iterations to consider. The training stops when either stop criterion is met.
 
 - `prune` -- Colon-separated string of `T` (true) or `F` (false) indicating which layers to prune. If missing or shorter than `arch`, all (remaining) layers are taken as True (convolutional layers can also be pruned, max-pool layers cannot be pruned, but require an entry, which will be ignored). For example `T:T:T:F` reproduces the pruning used in the paper.
