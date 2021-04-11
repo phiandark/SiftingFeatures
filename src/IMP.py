@@ -98,7 +98,7 @@ def main():
     finalconf = weil[rest_file_step]
     ratios += rat_factor*(1-ratios)
     mask = get_mask(finalconf, arch, ratios, ml)
-    it = itst+1
+    it = itst
     if st_wei<steps:
       Tpoints = [st_wei, steps]
     else:
