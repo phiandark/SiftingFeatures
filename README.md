@@ -1,4 +1,4 @@
-# Code for the paper "Sifting out the features: are convolutional networksthe winning lottery ticket of the fully connected ones?"
+# Code for the paper "Sifting out the features by pruning: Are convolutional networks the winning lottery ticket of the fully connected ones?"
 
 This repository hosts code to reproduce all results in the paper by F. Pellegrini and G. Biroli, that can be found here.
 
