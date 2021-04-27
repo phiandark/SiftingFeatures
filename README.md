@@ -30,7 +30,7 @@ Sample input files for the main experiments presented in the paper can be found 
 
 The main purpose of the code is performing IMP starting from a FCNN training on ImageNet32 images.
 The code is not particularly optimized and it does not exploit the progressively sparser structure of the networks.
-However, with standard parameters the whole IMP procedure should run in a few hours on a modern GPU (e.g.\ RTX2080).
+However, with standard parameters the whole IMP procedure should run in a few hours on a modern GPU (e.g. RTX2080).
 
 The code produces several output files:
 
