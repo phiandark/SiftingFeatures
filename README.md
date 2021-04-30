@@ -1,6 +1,6 @@
 # Code for the paper "Sifting out the features by pruning: Are convolutional networks the winning lottery ticket of fully connected ones?"
 
-This repository hosts code to reproduce all results in the paper by F. Pellegrini and G. Biroli, that can be found here.
+This repository hosts code to reproduce all results in the paper by F. Pellegrini and G. Biroli, that can be found [here](https://arxiv.org/abs/2104.13343).
 
 The main purpose of this code is performing Iterative Magnitude Pruning (IMP, see [this paper](https://arxiv.org/abs/1803.03635)) on a small network trained to classify images from ImageNet.
 Please refer to the paper for further details.
