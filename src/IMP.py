@@ -148,7 +148,7 @@ def main():
         if st in set(Tpoints):
           ww, ee, te, mv = net.run(sess, batch_xs, batch_ys, data.e_in, data.e_lab, amv, True)
           weil.append(ww)
-          amvl.append(amv)
+          amvl.append(amv.copy())
         elif st%val_each==0:
           ee, te, mv = net.run(sess, batch_xs, batch_ys, data.e_in, data.e_lab, amv, False)
         else:
