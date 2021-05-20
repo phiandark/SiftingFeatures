@@ -84,7 +84,7 @@ def main():
   print('Data read. Building network...')
   # Setting up network
   arch = archparse(archstr, prstr, data)
-  prunable = [l-1 for l, lay in enumerate(arch) if lay[2]] #List of prunable
+  prunable = [l for l, lay in enumerate(arch) if lay[2]] #List of prunable
   lprun = len(prunable)
   ratios = ratio*np.ones(lprun)
 

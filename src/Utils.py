@@ -74,17 +74,17 @@ def get_mask(ic, arch, ratios, maskold=None):
         maskl.append([np.ones(np.shape(ic[l][0])),np.ones(np.shape(ic[l][1]))])
     elif typ=='c':
       if prun:
-        tm = np.abs(ic[l])
+        tm = np.abs(ic[l][0])
         if maskold:
-          tm *= maskold[l]
+          tm *= maskold[l][0]
         wlist = tm.flatten()
         ncutoff = int(ratios[ri]*len(wlist))
         ri += 1
         wlist.sort()
         thrs = wlist[ncutoff]
-        maskl.append(np.where(tm<thrs, 0.0, 1.0).astype(np.float32))
+        maskl.append([np.where(tm<thrs, 0.0, 1.0).astype(np.float32)])
       else: 
-        maskl.append(np.ones(np.shape(ic[l])))
+        maskl.append([np.ones(np.shape(ic[l]))])
     elif typ=='p':
       maskl.append([])
   return maskl
@@ -103,10 +103,10 @@ def make_mask(arch, spars):
         imask.append([np.ones((par[0],par[1]),dtype=np.float32), np.ones((par[1]),dtype=np.float32)])
     elif typ=='c':
       if prun:
-        imask.append(np.where(np.random.uniform(0.0,1.0,(par[0],par[1],par[2],par[3]))<spars[si],0,1).astype(np.float32))
+        imask.append([np.where(np.random.uniform(0.0,1.0,(par[0],par[1],par[2],par[3]))<spars[si],0,1).astype(np.float32)])
         si += 1
       else:
-        imask.append(np.ones((par[0],par[1],par[2],par[3]),dtype=np.float32))
+        imask.append([np.ones((par[0],par[1],par[2],par[3]),dtype=np.float32)])
     elif typ=='p':
       imask.append([])
     else:

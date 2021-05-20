@@ -59,12 +59,12 @@ class Network:
           self.yclass = tf.argmax(self.y, axis=1, output_type=tf.int32)
       elif typ=='c':
         M = tf.Variable(tf.random.normal(par[:4], stddev=np.sqrt(2./(par[0]*par[1]*par[2]+par[3]))))
-        self.wl.append(M)
+        self.wl.append([M])
         if mask:
           mM = tf.Variable(tf.ones(par[:4]))
           self.ml.append([mM])
         if mask:
-          tmph = tf.nn.conv2d(self.h[l], M*mM[l], strides=par[4], padding='VALID', data_format='NCHW')
+          tmph = tf.nn.conv2d(self.h[l], M*mM, strides=par[4], padding='VALID', data_format='NCHW')
         else:
           tmph = (tf.nn.conv2d(self.h[l], M, strides=par[4], padding='VALID', data_format='NCHW'))
         tmph = tf.nn.relu(tmph)
@@ -86,18 +86,13 @@ class Network:
     
   def load(self, sess, conf, mask):
     for l, (typ, par, _) in enumerate(self.arch):
-      if typ=='f' or typ=='x':
+      if typ=='f' or typ=='x' or typ=='c':
         if conf:
           for w, refw in zip(self.wl[l],conf[l]):
             w.load(refw, sess)
         if mask:
           for m, refm in zip(self.ml[l],mask[l]):
             m.load(refm, sess)
-      elif typ=='c':
-        if conf:
-          wl.load(conf[l], sess)
-        if mask:
-          ml.load(mask[l], sess)
 
   def run(self, sess, tr_x, tr_y, ts_x, ts_y, amv, data=False, savac=False, train=True, val=True):
     mvdict = {self.in_mv[l]: amv[l] for l in range(len(amv))}
